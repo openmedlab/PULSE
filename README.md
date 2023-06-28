@@ -38,7 +38,7 @@
 ### 下载地址
 
 - [**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5)
-- 我们将持续更新7B大小的模型，如果您需要更大的模型或者量化后的版本，欢迎联系 xujie@pjlab.org.cn 建立合作
+- 如果您需要更大的模型或者量化后的版本，欢迎[联系我们](mailto:xujie@pjlab.org.cn)建立合作。
 
 ### 局限性
 
@@ -87,11 +87,15 @@
 
 **XrayPULSE**
 
+一款将医疗大语言模型PULSE与X-ray图像模型结合的应用，实现了多模态会话功能。
+
 [openmedlab/XrayPULSE](https://github.com/openmedlab/XrayPULSE)
 
 ![image](./pics/XrayPULSE.png)
 
 **病历结构化**
+
+一个基于PULSE模型的结构化工具，旨在帮助用户处理和分析文本数据。它提供了单选、多选、信息提取等功能。
 
 [JuneYaooo/llm_structure_tool](https://github.com/JuneYaooo/llm_structure_tool)
 
@@ -100,11 +104,15 @@
 
 **术语归一化**
 
+一个基于PULSE模型的医疗术语归一化的应用，归一化的任务是将临床上同一种诊断、手术、药品、检查、症状等各种不同的说法对应到标准用词上。
+
 [JOHNNY-fans/HierNorm](https://github.com/JOHNNY-fans/HierNorm)
 
 ![image](./pics/HierNorm.png) 
 
 **知识库问答 (建设中)**
+
+一款基于PULSE开发的聊天机器人，用户可以自己添加相关知识库，以开发更丰富的应用场景。
 
 [JuneYaooo/medical_assistant](https://github.com/JuneYaooo/medical_kb_chatbot)
 
