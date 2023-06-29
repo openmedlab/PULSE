@@ -82,19 +82,12 @@ for path in all_predict_paths:
 
 
     for elo_data_item in elo_data:
-
-        if elo_data_item['model_a'] in {"PULSE_7bv7", "PULSE_14bv7"}:
-            continue
-
-        if elo_data_item['model_b'] in {"PULSE_7bv7", "PULSE_14bv7"}:
-            continue
-
         all_predict_data[model_name].append(elo_data_item)
 
 
 # %%
-del all_predict_data["med_detailed_answer"]
-del all_predict_data["chunyu"]
+# del all_predict_data["med_detailed_answer"]
+# del all_predict_data["chunyu"]
 
 # %%
 elo_df = {}

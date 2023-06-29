@@ -42,6 +42,7 @@
 
 ### 局限性
 
+- 本开源模型仅供医疗领域研究使用，尽管我们努力提供准确和最新的信息，但我们不能保证所提供信息的准确性、完整性或相关性，如使用本项目所含模型及其修改版本提供服务产生误导性或有害性言论，造成不良影响，与本项目无关。
 - 由于模型参数量较小和自回归生成范式，尽管模型提供了有关疾病诊断和治疗的推理结果，但这些结果不能代替线下职业医生的建议和治疗方案。所有回答仅供参考，不应作为诊断或治疗的依据。我们强烈建议用户在需要诊断或治疗疾病时，寻求专业医生的帮助和建议。
 
 ### Elo评测
@@ -207,7 +208,7 @@ python cli_demo.py
 
 ## 开源协议
 
-本项目所含代码采用[Apache 2.0](https://github.com/openmedlab/PULSE/blob/main/LICENSE)协议，模型权重采用[GNU AGPL 3.0](https://github.com/openmedlab/PULSE/blob/main/MODEL_LICENSE)协议。如使用本项目所含模型及其修改版本提供服务产生误导性或有害性言论，造成不良影响，由服务提供方负责，与本项目无关。
+本项目所含代码采用[Apache 2.0](https://github.com/openmedlab/PULSE/blob/main/LICENSE)协议，模型权重采用[GNU AGPL 3.0](https://github.com/openmedlab/PULSE/blob/main/MODEL_LICENSE)协议。
 
 <!-- ## Star History
 
