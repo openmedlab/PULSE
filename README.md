@@ -37,7 +37,7 @@
 
 ### 下载地址
 
-- [**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5)
+- [**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5) (本模型基于[bloomz-7b1-mt](https://huggingface.co/bigscience/bloomz-7b1-mt)进行微调)
 - 如果您需要更大的模型或者量化后的版本，欢迎[联系我们](mailto:xujie@pjlab.org.cn)建立合作。
 
 ### 局限性
