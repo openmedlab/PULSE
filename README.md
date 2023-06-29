@@ -64,8 +64,7 @@
 
 #### 评估数据集 [[eval/data]](eval/data)
 * MedQA_Mainland: 从[MedQA](https://github.com/jind11/MedQA)的Mainland/test子集中抽150条
-* PromptCBLUE: 从[PromptCBLUE](https://github.com/michael-wzhu/PromptCBLUE)的test子集中抽150条
-<!-- * detailedMedQA: 由医学专业人士标注的98条常见医疗领域问题的详尽回答 -->
+* PromptCBLUE: 从[PromptCBLUE](https://github.com/michael-wzhu/PromptCBLUE)的test子集中抽150条 <!-- * detailedMedQA: 由医学专业人士标注的98条常见医疗领域问题的详尽回答 -->
 * webMedQA: 从[webMedQA](https://github.com/hejunqing/webMedQA)的test子集中抽150条
 
 #### 评测模型
