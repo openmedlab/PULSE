@@ -45,17 +45,18 @@
 - 由于模型参数量较小和自回归生成范式，尽管模型提供了有关疾病诊断和治疗的推理结果，但这些结果不能代替线下职业医生的建议和治疗方案。所有回答仅供参考，不应作为诊断或治疗的依据。我们强烈建议用户在需要诊断或治疗疾病时，寻求专业医生的帮助和建议。
 
 ### Elo评测
-| model_name   | model_size   |     ALL |   MedQA_Mainland |   PromptCBLUE |   detailedMedQA |   webMedQA |
-|:-------------|:-------------|--------:|-----------------:|--------------:|----------------------:|-----------:|
-| GPT4         | 220B*8(?)    | 1243.79 |          1118.20 |       1166.39 |               1122.20 |    1132.74 |
-| ChatGPT      | 175B(?)      | 1149.38 |          1083.05 |       1102.31 |               1098.38 |    1097.88 |
-| PULSE_14b  | 14B          | 1114.23 |          1003.55 |       1055.56 |               1074.79 |    1074.28 |
-| PULSE_7b   | 7B           | 1084.18 |          1047.35 |       1047.27 |               1029.37 |    1069.40 |
-| QiZhenGPT    | 13B          |  979.94 |           952.66 |        929.56 |               1076.41 |    1006.85 |
-| BianQue      | 6B           |  959.35 |           927.86 |        922.65 |               1050.22 |    1042.64 |
-| Med-ChatGLM  | 6B           |  869.54 |           989.59 |        928.77 |                882.08 |     856.66 |
-| BenTsao      | 7B           |  809.13 |           954.20 |        933.39 |                815.51 |     856.20 |
-| DoctorGLM    | 6B           |  790.47 |           923.54 |        914.10 |                851.04 |     863.35 |
+| model_name                    | model_size   |   ALL |   MedQA_Mainland |   PromptCBLUE |   webMedQA |
+|:------------------------------|:-------------|------:|-----------------:|--------------:|-----------:|
+| GPT4                          | 220B*8(?)    |  1195 |             1087 |          1134 |       1107 |
+| ChatGPT                       | 175B(?)      |  1123 |             1053 |          1089 |       1067 |
+| PULSE_7b with prompt          | 7B           |  1074 |             1019 |          1047 |       1060 |
+| PULSE_14b                     | 14B          |  1055 |             1001 |          1037 |       1056 |
+| PULSE_7b                      | 7B           |  1054 |             1028 |          1037 |       1030 |
+| BianQue                       | 6B           |   926 |              939 |           920 |       1011 |
+| QiZhenGPT                     | 13B          |   918 |              949 |           935 |        974 |
+| Med-ChatGLM                   | 6B           |   864 |              988 |           921 |        859 |
+| BenTsao                       | 7B           |   846 |              966 |           913 |        859 |
+| DoctorGLM                     | 6B           |   812 |              935 |           891 |        856 |
 
 
 #### 评估方法
@@ -64,13 +65,14 @@
 #### 评估数据集 [[eval/data]](eval/data)
 * MedQA_Mainland: 从[MedQA](https://github.com/jind11/MedQA)的Mainland/test子集中抽150条
 * PromptCBLUE: 从[PromptCBLUE](https://github.com/michael-wzhu/PromptCBLUE)的test子集中抽150条
-* detailedMedQA: 由医学专业人士标注的98条常见医疗领域问题的详尽回答
+<!-- * detailedMedQA: 由医学专业人士标注的98条常见医疗领域问题的详尽回答 -->
 * webMedQA: 从[webMedQA](https://github.com/hejunqing/webMedQA)的test子集中抽150条
 
 #### 评测模型
 * GPT4
 * ChatGPT
 * PULSE_14b
+* PULSE_7b with prompt (加入了针对不同场景设计的prompts)
 * [PULSE_7b](https://huggingface.co/OpenMEDLab/PULSE-7bv5)
 * [QiZhenGPT](https://github.com/CMKRG/QiZhenGPT) (QiZhen-CaMA-13B-Checkpoint-6000)
 * [BianQue](https://github.com/scutcyr/BianQue) (BianQue-2.0)
@@ -93,7 +95,7 @@
 
 ![image](./pics/XrayPULSE.png)
 
-**病历结构化**
+**病历结构化 (建设中)**
 
 一个基于PULSE模型的结构化工具，旨在帮助用户处理和分析文本数据。它提供了单选、多选、信息提取等功能。
 
@@ -110,7 +112,7 @@
 
 ![image](./pics/HierNorm.png) 
 
-**知识库问答 (建设中)**
+**知识库问答**
 
 一款基于PULSE开发的聊天机器人，用户可以自己添加相关知识库，以开发更丰富的应用场景。
 

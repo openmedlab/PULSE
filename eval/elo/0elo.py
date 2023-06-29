@@ -1,5 +1,6 @@
 # %%
 import glob
+import pandas as pd
 
 # %%
 elo_data_path = "eval/elo/elo_data/"
@@ -30,7 +31,7 @@ all_predict_data = {}
 
 
 for path in all_predict_paths:
-    model_name = path.split("/")[-1].replace(".jsonl", "")
+    model_name = path.split("/")[-1].replace("_0629.jsonl", "").replace("_0628_2.jsonl", "").replace("_0628.jsonl", "").replace(".jsonl", "")
 
     elo_data = []
     elo_outputs = []
@@ -67,122 +68,65 @@ for path in all_predict_paths:
     for elo_data_item, elo_output in zip(elo_data, elo_outputs):
         elo_data_item['score'] = elo_output
 
-    all_predict_data[model_name] = elo_data
+        if elo_output is None:
+            elo_data_item['winner'] = "tie (None)"
+        elif elo_output[0] > elo_output[1]:
+            elo_data_item['winner'] = "model_a"
+        elif elo_output[1] > elo_output[0]:
+            elo_data_item['winner'] = "model_b"
+        elif elo_output[0] == elo_output[1]:
+            elo_data_item['winner'] = "tie"
+
+    if model_name not in all_predict_data:
+        all_predict_data[model_name] = []
+
+
+    for elo_data_item in elo_data:
+
+        if elo_data_item['model_a'] in {"PULSE_7bv7", "PULSE_14bv7"}:
+            continue
+
+        if elo_data_item['model_b'] in {"PULSE_7bv7", "PULSE_14bv7"}:
+            continue
+
+        all_predict_data[model_name].append(elo_data_item)
 
 
 # %%
-all_predict_data.keys()
+del all_predict_data["med_detailed_answer"]
+del all_predict_data["chunyu"]
 
 # %%
 elo_df = {}
 
 # %%
-from collections import defaultdict
-import random
-
-K=8
-INIT_RATING=1000
-SCALE=400
-BASE=10
-
+from elo_analysis import report_elo_analysis_results
 
 for task_name in all_predict_data.keys():
 
-    rating = defaultdict(lambda: INIT_RATING)
+    tt_report = report_elo_analysis_results(all_predict_data[task_name])
 
-    r_idxs = list(range(len(all_predict_data[task_name])))
-    random.seed(42)
-    random.shuffle(r_idxs)
-
-    for r_idx in r_idxs:
-        round_data_item = all_predict_data[task_name][r_idx]
-
-        score = round_data_item['score']
-
-        if score is None:
-            continue
-
-        # if round_data_item['model_a'] in {"PULSE_14bv5"}:
-        #     continue
-
-        # if round_data_item['model_b'] in {"PULSE_14bv5"}:
-        #     continue
-
-        ra = rating[round_data_item['model_a']]
-        rb = rating[round_data_item['model_b']]
-
-        ea = 1 / (1 + BASE ** ((rb - ra) / SCALE))
-        eb = 1 / (1 + BASE ** ((ra - rb) / SCALE))
-
-        if score[0] > score[1]:
-            sa = 1
-        elif score[1] > score[0]:
-            sa = 0
-        elif score[0] == score[1]:
-            sa = 0.5
-
-        rating[round_data_item['model_a']] += K * (sa - ea)
-        rating[round_data_item['model_b']] += K * (1 - sa - eb)
-
-    rating = sorted(rating.items(), key=lambda x:-x[1])
-
-    for k,v in rating:
+    for k,v in tt_report['elo_rating_median'].items():
         if k not in elo_df:
             elo_df[k] = {item: None for item in all_predict_data.keys()}
 
         elo_df[k][task_name] = v
 
     print(task_name)
-    print(rating)
+    print(tt_report['elo_rating_median'])
     print("----------------------------------------")
 
 
 # %%
-rating = defaultdict(lambda: INIT_RATING)
-
 all_data = []
 
 for v in all_predict_data.values():
     all_data.extend(v)
 
+all_report = report_elo_analysis_results(all_data)
 
-r_idxs = list(range(len(all_data)))
-random.seed(42)
-random.shuffle(r_idxs)
 
-for r_idx in r_idxs:
-    round_data_item = all_data[r_idx]
-
-    score = round_data_item['score']
-
-    if score is None:
-        continue
-
-    # if round_data_item['model_a'] in {"PULSE_14bv5"}:
-    #     continue
-
-    # if round_data_item['model_b'] in {"PULSE_14bv5"}:
-    #     continue
-
-    ra = rating[round_data_item['model_a']]
-    rb = rating[round_data_item['model_b']]
-
-    ea = 1 / (1 + BASE ** ((rb - ra) / SCALE))
-    eb = 1 / (1 + BASE ** ((ra - rb) / SCALE))
-
-    if score[0] > score[1]:
-        sa = 1
-    elif score[1] > score[0]:
-        sa = 0
-    elif score[0] == score[1]:
-        sa = 0.5
-
-    rating[round_data_item['model_a']] += K * (sa - ea)
-    rating[round_data_item['model_b']] += K * (1 - sa - eb)
-
-rating = sorted(rating.items(), key=lambda x:-x[1])
-
-for k,v in rating:
+for k,v in all_report["elo_rating_median"].items():
     if k not in elo_df:
         elo_df[k] = {item: None for item in all_predict_data.keys()}
 
@@ -194,9 +138,18 @@ import pandas as pd
 model_size_map = {
     "GPT4": "220B*8(?)",
     "ChatGPT": "175B(?)",
+    "ChatGLM": "6B",
+    'MedicalGPT-zh': "6B",
+    'Chinese-LLaMA-Alpaca-Plus-13b': "13B",
 
     "PULSE_14bv5": "14B",
+    "PULSE_14bv5_add_prompt": "14B",
     "PULSE_7bv5": "7B",
+    "PULSE_7bv5_add_prompt": "7B",
+
+    "PULSE_14bv7": "14B",
+    "PULSE_7bv7": "7B",
+
     "QiZhenGPT": "13B",
     "BianQue": "6B",
     "Med-ChatGLM": "6B",
