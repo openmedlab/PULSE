@@ -115,7 +115,7 @@
 
 一款基于PULSE开发的聊天机器人，用户可以自己添加相关知识库，以开发更丰富的应用场景。
 
-[JuneYaooo/medical_assistant](https://github.com/JuneYaooo/medical_kb_chatbot)
+[JuneYaooo/medical_kb_chatbot](https://github.com/JuneYaooo/medical_kb_chatbot)
 
 ![image](./pics/medical_assistant.png)
 

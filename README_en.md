@@ -111,7 +111,7 @@ An application based on PULSE for term normalization. The task of normalization 
 
 A chatbot developed on PULSE, where users can add customized knowledge bases for their own application scenarios.
 
-[JuneYaooo/medical_assistant](https://github.com/JuneYaooo/medical_assistant)
+[JuneYaooo/medical_kb_chatbot](https://github.com/JuneYaooo/medical_kb_chatbot)
 
 ![image](./pics/medical_assistant.png)
 
