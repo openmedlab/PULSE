@@ -95,6 +95,14 @@
 
 ![image](./pics/XrayPULSE.png)
 
+**PULSE-COVID-19**
+
+一个基于PULSE微调且结合了广州实验室内部COVID-19知识数据库语料库的模型。
+
+[openmedlab/PULSE-COVID-19](https://github.com/openmedlab/PULSE-COVID-19)
+
+![image](./pics/covid.jpg)
+
 **病历结构化 (建设中)**
 
 一个基于PULSE模型的结构化工具，旨在帮助用户处理和分析文本数据。它提供了单选、多选、信息提取等功能。

@@ -92,6 +92,14 @@ An application that combines PULSE with an X-ray visual encoder, achieving multi
 
 ![image](./pics/XrayPULSE.png)
 
+**PULSE-COVID-19**
+
+A model fine-tuned based on the PULSE, incorporating an in-house corpus of COVID-19 knowledge databases from the Guangzhou Laboratory. 
+
+[openmedlab/PULSE-COVID-19](https://github.com/openmedlab/PULSE-COVID-19)
+
+![image](./pics/covid.jpg)
+
 **Structured Data Extraction (under construction)**
 
 A structuring tool based on PULSE, designed to assist users in processing and analyzing free-text data. It offers features such as single selection, multiple selection, and information extraction.
