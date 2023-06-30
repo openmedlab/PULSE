@@ -93,7 +93,7 @@
 
 [openmedlab/XrayPULSE](https://github.com/openmedlab/XrayPULSE)
 
-![image](./pics/XrayPULSE.png)
+![image](./pics/XrayPULSE.jpg)
 
 **PULSE-COVID-19**
 
