@@ -116,7 +116,7 @@
 
 一个基于PULSE模型的医疗术语归一化的应用，归一化的任务是将临床上同一种诊断、手术、药品、检查、症状等各种不同的说法对应到标准用词上。
 
-[JOHNNY-fans/HierNorm](https://github.com/JOHNNY-fans/HierNorm)
+[JOHNNY-fans/NormPULSE](https://github.com/JOHNNY-fans/NormPULSE)
 
 ![image](./pics/HierNorm.png) 
 
