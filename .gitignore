@@ -165,8 +165,15 @@ logs
 
 eval/predict
 eval/models
+eval/elo/elo_data
+eval/elo/elo_inputs
+eval/elo/gpt3.5_elo_outputs
+eval/elo/gpt4_elo_outputs
+
 
 BIG-Bench-Hard.jsonl
+ceval-exam-val.jsonl
+med_detailed_answer.jsonl
 chinese_translated_vicuna_eval_set.jsonl
 chunyu.bak
 MedQA_Mainland_from_self_med.jsonl
@@ -175,5 +182,5 @@ chunyu.json
 all.jsonl
 chunyu.jsonl
 split.sh
-*.jsonl
+# *.jsonl
 
