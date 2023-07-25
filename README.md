@@ -77,8 +77,8 @@
 * PULSE_14b w/ prompt 加入了针对不同场景设计的prompts
 * PULSE_7b w/ prompt 加入了针对不同场景设计的prompts
 * [PULSE_7b](https://huggingface.co/OpenMEDLab/PULSE-7bv5)
-* [ChatGLM2] (https://github.com/THUDM/ChatGLM2-6B)
-* [HuatuoGPT_7b] (https://github.com/FreedomIntelligence/HuatuoGPT) (Backbone: Baichuan-7B)
+* [ChatGLM2](https://github.com/THUDM/ChatGLM2-6B)
+* [HuatuoGPT_7b](https://github.com/FreedomIntelligence/HuatuoGPT) (Backbone: Baichuan-7B)
 * [QiZhenGPT](https://github.com/CMKRG/QiZhenGPT) (QiZhen-CaMA-13B-Checkpoint-6000)
 * [BianQue](https://github.com/scutcyr/BianQue) (BianQue-2.0)
 * [Med-ChatGLM](https://github.com/SCIR-HI/Med-ChatGLM)
