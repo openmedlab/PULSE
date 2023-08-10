@@ -36,7 +36,7 @@
 ### Download Link
 
 - [**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5) (this model is finetuned on [bloomz-7b1-mt](https://huggingface.co/bigscience/bloomz-7b1-mt))
-- Larger models and quantized models are also available. Please [contact us](mailto:xujie@pjlab.org.cn) for collaboration. 
+- Larger models and quantized models are also available. Please [contact us](mailto:zhangxiaofan@pjlab.org.cn) for collaboration. 
 
 ### Limitations
 
