@@ -12,7 +12,7 @@ logger.setLevel("ERROR")
 warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_name", default="OpenMEDLab/PULSE-7bv5", type=str)
+parser.add_argument("--model_name", default="OpenMEDLab/PULSE-20bv5", type=str)
 parser.add_argument("--gpu", default="0", type=str)
 parser.add_argument("--input_max_len", default=1536, type=int)
 parser.add_argument("--model_type", default='在线问诊', type=str)
@@ -81,7 +81,6 @@ def main():
             clear()
             input_ids = tokenizer(
                 first_instruction,
-                add_special_tokens=False
             ).input_ids + [tokenizer.convert_tokens_to_ids("</s>")]
             i = 0
             continue
@@ -89,13 +88,13 @@ def main():
         if i == 0:
             query = model_type_prompt_map[args.model_type] + query
 
-        input_ids += tokenizer("User: " + query, add_special_tokens=False).input_ids
+        input_ids += tokenizer("User: " + query).input_ids
         input_ids += [tokenizer.convert_tokens_to_ids("</s>")]  
 
         # print(tokenizer.decode(input_ids, skip_special_tokens=False)) 
 
         model_inputs = tokenizer.pad(
-            {"input_ids": [input_ids + tokenizer("Helper: ", add_special_tokens=False).input_ids[:1]]}, 
+            {"input_ids": [input_ids + tokenizer("Helper: ").input_ids[:1]]}, 
             return_tensors="pt",
         )
 
@@ -126,7 +125,7 @@ def main():
         while new_end_pos < len(outputs_token) and outputs_token[new_end_pos] != tokenizer.convert_tokens_to_ids("</s>"):
             new_end_pos += 1
 
-        outputs_token = list(tokenizer("Helper: ", add_special_tokens=False).input_ids[:1]) + outputs_token[new_start_pos:new_end_pos]
+        outputs_token = list(tokenizer("Helper: ").input_ids[:1]) + outputs_token[new_start_pos:new_end_pos]
 
         input_ids += outputs_token
         input_ids += [tokenizer.convert_tokens_to_ids("</s>")] 

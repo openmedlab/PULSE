@@ -16,7 +16,7 @@ logger.setLevel("ERROR")
 warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_name", default="OpenMEDLab/PULSE-7bv5", type=str)
+parser.add_argument("--model_name", default="OpenMEDLab/PULSE-20bv5", type=str)
 parser.add_argument("--gpu", default="0", type=str)
 parser.add_argument("--input_max_len", default=1536, type=int)
 args = parser.parse_args()
@@ -139,22 +139,21 @@ def predict(
 
     input_ids = tokenizer(
         first_instruction,
-        add_special_tokens=False
     ).input_ids + [tokenizer.convert_tokens_to_ids("</s>")]
     
     for i, (old_query, response) in enumerate(history):
         if i == 0:
             old_query = model_type_prompt_map[model_type] + old_query
 
-        input_ids += tokenizer("User: " + old_query, add_special_tokens=False).input_ids
+        input_ids += tokenizer("User: " + old_query).input_ids
         input_ids += [tokenizer.convert_tokens_to_ids("</s>")]      
 
         if response is not None:
-            input_ids += tokenizer("Helper: " + response, add_special_tokens=False).input_ids
+            input_ids += tokenizer("Helper: " + response).input_ids
             input_ids += [tokenizer.convert_tokens_to_ids("</s>")]
 
     # 引导启动
-    input_ids += tokenizer("Helper: ", add_special_tokens=False).input_ids[:1]
+    input_ids += tokenizer("Helper: ").input_ids[:1]
     
     model_inputs = tokenizer.pad(
         {"input_ids": [input_ids]}, 
@@ -189,7 +188,7 @@ def predict(
     thread.start()
 
     # 起始
-    output_tokens = list(tokenizer("Helper: ", add_special_tokens=False).input_ids[:1])
+    output_tokens = list(tokenizer("Helper: ").input_ids[:1])
     for token in streamer:
         if token[0] not in {
             tokenizer.convert_tokens_to_ids("</s>"),
@@ -255,4 +254,4 @@ with gr.Blocks() as demo:
     emptyBtn.click(reset_state, outputs=[chatbot, history], show_progress=True)
 
 
-demo.queue().launch(share=False, inbrowser=False)
+demo.queue().launch(share=False, inbrowser=True)
