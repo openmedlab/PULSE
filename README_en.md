@@ -70,20 +70,18 @@
 * webMedQA: Extracting 150 samples from the test subset of [webMedQA](https://github.com/hejunqing/webMedQA).
 
 #### Evaluation Models
-* GPT4
-* ChatGPT
-* PULSE_176b int4 (INT4 quantization)
-* PULSE_14b with prompt (adding prompts designed for different scenarios)
-* PULSE_7b with prompt (adding prompts designed for different scenarios)
-* [PULSE_7b](https://huggingface.co/OpenMEDLab/PULSE-7bv5)
-* [ChatGLM2](https://github.com/THUDM/ChatGLM2-6B)
-* [HuatuoGPT_7b](https://github.com/FreedomIntelligence/HuatuoGPT) (Backbone: Baichuan-7B)
-* [QiZhenGPT](https://github.com/CMKRG/QiZhenGPT) (QiZhen-CaMA-13B-Checkpoint-6000)
-* [BianQue](https://github.com/scutcyr/BianQue) (BianQue-2.0)
-* [Med-ChatGLM](https://github.com/SCIR-HI/Med-ChatGLM)
-* [BenTsao](https://github.com/SCIR-HI/Huatuo-Llama-Med-Chinese) (lora-alpaca-med-alpaca-alldata)
+* GPT4: OpenAI API "gpt-4-1106-preview"
+* ChatGPT: OpenAI API "gpt-3.5-turbo-1106"
+* PULSE_pro: >100B 
+* [PULSE_20b](https://huggingface.co/internlm/internlm-20b)
+* [Baichuan2](https://huggingface.co/baichuan-inc/Baichuan2-13B-Chat)
+* [ChatGLM3](https://huggingface.co/THUDM/chatglm3-6b-32k)
+* [HuatuoGPT2](https://www.huatuogpt.cn/) (Official Website)
+* [QiZhenGPT](https://github.com/CMKRG/QiZhenGPT) (QiZhen-CaMA-13B-Checkpoint-12400)
+* [BenTsao](https://github.com/SCIR-HI/Huatuo-Llama-Med-Chinese) (LoRA for Huozi 1.0)
+* [BianQue2](https://huggingface.co/scutcyr/BianQue-2) (BianQue-2.0)
+* [MING](https://huggingface.co/BlueZeros/MING-7B)
 * [DoctorGLM](https://github.com/xionghonglin/DoctorGLM) (p-tuningv2)
-
 
 #### Hyperparameter Selection
 * For cost considerations, we chose to perform 360 rounds of random evaluation on each dataset. The order in which models compete against each other in the PK (player versus player) matches was randomized to counteract any order-related bias, with a random seed set to 42. The implementation code for the Elo rating and other hyperparameters can be referred to in Vicuna's Elo code: [link to Vicuna's Elo code](https://raw.githubusercontent.com/lm-sys/FastChat/833d65032a715240a3978f4a8f08e7a496c83cb1/fastchat/serve/monitor/elo_analysis.py). The Elo rating parameters used were K=8 and an initial rating of 1000.
