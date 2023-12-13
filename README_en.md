@@ -42,8 +42,8 @@
 ### Download Link
 
 - [**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5) (this model is finetuned on [bloomz-7b1-mt](https://huggingface.co/bigscience/bloomz-7b1-mt))
-- [**PULSE-20b**](https://huggingface.co/OpenMEDLab/PULSE-20bv5) (this model is finetuned on[InternLM-20B](https://huggingface.co/internlm/internlm-20b))
-- Quantized models will be released soon. Please [contact us](mailto:zhangxiaofan@pjlab.org.cn) for collaboration of larger models. 
+- [**PULSE-20b**](https://huggingface.co/OpenMEDLab/PULSE-20bv5) (this model is finetuned on [InternLM-20B](https://huggingface.co/internlm/internlm-20b))
+- Quantized models will be released soon. Regarding the larger models please [contact us](mailto:zhangxiaofan@pjlab.org.cn) for collaboration. 
 
 ### Limitations
 
@@ -98,7 +98,7 @@
 * [DoctorGLM](https://github.com/xionghonglin/DoctorGLM) (p-tuningv2)
 
 ### Hyperparameter Selection
-* For cost considerations, we chose to perform 360 rounds of random evaluation on each dataset. The order in which models compete against each other in the PK (player versus player) matches was randomized to counteract any order-related bias, with a random seed set to 42. The implementation code for the Elo rating and other hyperparameters can be referred to in Vicuna's Elo code: [link to Vicuna's Elo code](https://raw.githubusercontent.com/lm-sys/FastChat/833d65032a715240a3978f4a8f08e7a496c83cb1/fastchat/serve/monitor/elo_analysis.py). The Elo rating parameters used were K=8 and an initial rating of 1000.
+* For cost considerations, we chose to perform 360 rounds of random evaluation on each dataset. The order in which models compete against each other in the PK (player versus player) matches was randomized to counteract any order-related bias, with a random seed set to 42. The implementation code for the Elo rating and other hyperparameters can be referred to in Vicuna's Elo code: [link to Vicuna's Elo code](https://raw.githubusercontent.com/lm-sys/FastChat/833d65032a715240a3978f4a8f08e7a496c83cb1/fastchat/serve/monitor/elo_analysis.py). The Elo rating parameters used were K=4 and an initial rating of 1000.
 
 ### Related Repository
 * Please refer to [PULSE-EVAL](https://github.com/openmedlab/PULSE-EVAL) for detailed code, data and results.
@@ -108,8 +108,7 @@
 
 ## Fine-tuning
 
-基于[LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) 项目，我们提供了可以快速微调PULSE的代码[PULSE-tuner](https://github.com/JuneYaooo/pulse-tuner/tree/main)。
-
+We provide [PULSE-tuner](https://github.com/JuneYaooo/pulse-tuner/tree/main) to finetune PULSE model, based on [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) project.
 
 
 ## Quantization

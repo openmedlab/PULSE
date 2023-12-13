@@ -91,7 +91,6 @@
 * GPT4: OpenAI API "gpt-4-1106-preview"
 * ChatGPT: OpenAI API "gpt-3.5-turbo-1106"
 * PULSE_pro: 千亿级别模型
----
 * [PULSE_20b](https://huggingface.co/internlm/internlm-20b)
 * [Baichuan2](https://huggingface.co/baichuan-inc/Baichuan2-13B-Chat)
 * [ChatGLM3](https://huggingface.co/THUDM/chatglm3-6b-32k)
@@ -107,7 +106,7 @@
 * 出于成本考虑，我们选择每个数据集进行360轮随机评估，随机选择模型PK的先后顺序以抵消先后顺序的影响，随机种子为：42。Elo rating的实现代码和其他超参参照[Vicuna的Elo代码](https://raw.githubusercontent.com/lm-sys/FastChat/833d65032a715240a3978f4a8f08e7a496c83cb1/fastchat/serve/monitor/elo_analysis.py): K=4, init rating=1000。
 
 ### 开源仓库
-* 关于Elo评测，更详细的测评结果，可下载的数据、代码，请移步[PULSE-EVAL](https://github.com/openmedlab/PULSE-EVAL)
+* 关于Elo评测，更详细的测评结果，可下载的数据、代码，请移步[PULSE-EVAL](https://github.com/openmedlab/PULSE-EVAL)。
 * 我们也在[OpenCompass](https://github.com/open-compass/opencompass)上线了[MedBench](https://github.com/open-compass/opencompass/tree/main/configs/datasets/MedBench),提供了更多的评测指标和数据集用来进行医疗领域大语言模型的评测。
 
 
