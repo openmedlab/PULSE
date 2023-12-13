@@ -163,12 +163,7 @@ logs
 
 *.ipynb
 
-eval/predict
-eval/models
-eval/elo/elo_data
-eval/elo/elo_inputs
-eval/elo/gpt3.5_elo_outputs
-eval/elo/gpt4_elo_outputs
+eval
 
 
 BIG-Bench-Hard.jsonl
