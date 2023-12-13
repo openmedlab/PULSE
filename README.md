@@ -74,16 +74,14 @@
 
 ### 评估数据集
 
-<center>公开数据集 [[eval/data]](eval/data) </center> 
-
+#### 公开数据集 [[eval/data]](eval/data) 
 * MedQA_USMLE: 从[MedQA](https://github.com/jind11/MedQA)的USMLE/test子集中抽150条
 * MedQA_Mainland: 从[MedQA](https://github.com/jind11/MedQA)的Mainland/test子集中抽150条
 * PromptCBLUE: 从[PromptCBLUE](https://github.com/michael-wzhu/PromptCBLUE)的test子集中抽150条 
 * webMedQA: 从[webMedQA](https://github.com/hejunqing/webMedQA)的test子集中抽150条
 
-<center>私有数据集</center>
-
-* CheckupQA: 体检场景下的数值类咨询数据集。测试模型对于医疗相关数值的理解和分析能力。
+#### 私有数据集
+* CheckupQA: 体检场景下的数值类咨询数据集,测试模型对于医疗相关数值的理解和分析能力。
 * MedicineQA: 给定标准参考文献时的用药咨询数据集,测试RAG(retrieval-augmented generation)场景下的模型能力。
 * DialogSumm: 从医患对话中生成五史一诉,测试模型的长文本能力。
 * MedTriage: 根据用户信息给出导诊建议,测试模型在可变候选科室条件下选择正确科室的能力。
@@ -93,9 +91,7 @@
 * GPT4: OpenAI API "gpt-4-1106-preview"
 * ChatGPT: OpenAI API "gpt-3.5-turbo-1106"
 * PULSE_pro: 千亿级别模型
-
-<center>开源模型</center>
-
+---
 * [PULSE_20b](https://huggingface.co/internlm/internlm-20b)
 * [Baichuan2](https://huggingface.co/baichuan-inc/Baichuan2-13B-Chat)
 * [ChatGLM3](https://huggingface.co/THUDM/chatglm3-6b-32k)
@@ -111,7 +107,8 @@
 * 出于成本考虑，我们选择每个数据集进行360轮随机评估，随机选择模型PK的先后顺序以抵消先后顺序的影响，随机种子为：42。Elo rating的实现代码和其他超参参照[Vicuna的Elo代码](https://raw.githubusercontent.com/lm-sys/FastChat/833d65032a715240a3978f4a8f08e7a496c83cb1/fastchat/serve/monitor/elo_analysis.py): K=4, init rating=1000。
 
 ### 开源仓库
-* 更详细的数据、代码、测评结果请移步[PULSE-EVAL](https://github.com/openmedlab/PULSE-EVAL)
+* 关于Elo评测，更详细的测评结果，可下载的数据、代码，请移步[PULSE-EVAL](https://github.com/openmedlab/PULSE-EVAL)
+* 我们也在[OpenCompass](https://github.com/open-compass/opencompass)上线了[MedBench](https://github.com/open-compass/opencompass/tree/main/configs/datasets/MedBench),提供了更多的评测指标和数据集用来进行医疗领域大语言模型的评测。
 
 
 ## 微调
@@ -120,7 +117,7 @@
 
 ## 量化
 
-* 对于新发布的[**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-20bv5) 模型，可直接采用[LMDeploy](https://github.com/InternLM/lmdeploy) 提供的方案进行量化。
+* 对于新发布的[**PULSE-20b**](https://huggingface.co/OpenMEDLab/PULSE-20bv5) 模型，可直接采用[LMDeploy](https://github.com/InternLM/lmdeploy) 提供的方案进行量化。
 * 对于之前[**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5)模型，我们也提供了[GPTQ-for-PULSE](https://github.com/hanrui1sensetime/GPTQ-for-PULSE/tree/pulse)量化方案。
 
 

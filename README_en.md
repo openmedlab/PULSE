@@ -14,14 +14,20 @@
   - [Key Features](#Key-Features)
   - [Download Link](#Download-Link)
   - [Limitations](#Limitations)
-  - [Elo Evaluation](Elo-Evaluation)
-  - [Related Applications](#Related-Applications)
-  - [Use Cases](#Use-Cases) 
+- [Elo Evaluation](Elo-Evaluation)
+- [Fine-tuning](Fine-tuning)
+- [Quantization](Quantization)
 - [Inference](#Inference)
   - [Hardware Requirements](#Hardware-Requirements)
   - [Installation](#Installation)
   - [Examples](#Examples)
+  - [Use Cases](#Use-Cases) 
 - [Related Links](#Links)
+  - [XrayPULSE](#XrayPULSE) 
+  - [PULSE-COVID-19](#PULSE-COVID-19) 
+  - [Structured Data Extraction](#Structured-Data-Extraction) 
+  - [Clinical Term Normalization](#Clinical-Term-Normalization) 
+  - [Knowledge Based Chatbot](#Knowledge-Based-Chatbot) 
 - [Acknowledgement](#Acknowledgement)
 - [License](#License)
 
@@ -36,7 +42,8 @@
 ### Download Link
 
 - [**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5) (this model is finetuned on [bloomz-7b1-mt](https://huggingface.co/bigscience/bloomz-7b1-mt))
-- Larger models and quantized models are also available. Please [contact us](mailto:zhangxiaofan@pjlab.org.cn) for collaboration. 
+- [**PULSE-20b**](https://huggingface.co/OpenMEDLab/PULSE-20bv5) (this model is finetuned on[InternLM-20B](https://huggingface.co/internlm/internlm-20b))
+- Quantized models will be released soon. Please [contact us](mailto:zhangxiaofan@pjlab.org.cn) for collaboration of larger models. 
 
 ### Limitations
 
@@ -44,32 +51,39 @@
 -  We cannot guarantee the accuracy, completeness, or relevance of the information generated. We emphatically recommend that users consult qualified healthcare professionals for personalized medical advice and treatment plans.
 
 
-### Elo Evaluation
-| model_name                    | model_size   |   ALL |   MedQA_Mainland |   PromptCBLUE |   webMedQA |
-|:------------------------------|:-------------|------:|-----------------:|--------------:|-----------:|
-| GPT4                          | 220B*8(?)    | 1206 | 1097 | 1188 | 1139 |
-| PULSE_176b int4               | 176B         | 1136 | 1084 | 1118 | 1083 |
-| ChatGPT                       | 175B(?)      | 1126 | 1060 | 1120 | 1087 |
-| PULSE_14b with prompt         | 14B          | 1071 | 990 | 1042 | 1122 |
-| PULSE_7b with prompt          | 7B           | 1065 | 1008 | 1046 | 1080 |
-| PULSE_7b                      | 7B           | 1049 | 1016 | 1051 | 1037 |
-| ChatGLM 2                     | 6B           | 1012 | 1023 | 994 | 1007 |
-| HuatuoGPT_7b                  | 7B           | 953 | 1004 | 897 | 991 |
-| QiZhenGPT                     | 13B          | 902 | 905 | 908 | 975 |
-| BianQue                       | 6B           | 889 | 893 | 874 | 996 |
-| Med-ChatGLM                   | 6B           | 818 | 954 | 873 | 791 |
-| BenTsao                       | 7B           | 802 | 920 | 870 | 803 |
-| DoctorGLM                     | 6B           | 779 | 896 | 852 | 801 |
+## Elo Evaluation
+| Model Name   |   AVG Rank |   MedQA-USMLE |   MedQA-Mainland |   PromptCBLUE |   WebMedQA |   CheckupQA |   MedicineQA |   DialogSumm |   MedTriage (F1) |
+|:-------------|-----------:|--------------:|-----------------:|--------------:|-----------:|------------:|-------------:|-------------:|-----------------:|
+| GPT-4        |       1.25 |          1129 |             1117 |          1110 |       1116 |        1096 |         1098 |         1109 |             0.65 |
+| PULSE-Pro    |       1.75 |          1089 |             1092 |          1088 |       1119 |        1105 |         1083 |         1096 |             0.63 |
+| ChatGPT      |       4.00 |          1086 |             1057 |          1064 |       1053 |        1020 |         1029 |         1080 |             0.43 |
+| PULSE-20b     |       4.12 |          1042 |             1024 |          1039 |       1059 |        1049 |         1069 |         1076 |             0.40 |
+| Baichuan2    |       4.50 |          1024 |             1041 |          1065 |       1044 |        1062 |         1035 |         1069 |             0.33 |
+| ChatGLM3     |       5.62 |          1038 |             1062 |           997 |       1012 |        1003 |         1024 |         1021 |             0.06 |
+| HuatuoGPT2   |       7.62 |           955 |              993 |           985 |        963 |         983 |         1003 |          980 |             0.01 |
+| QiZhenGPT    |       8.38 |           955 |              959 |           945 |        989 |        1039 |          932 |          921 |             0.00 |
+| BenTsao      |       8.75 |           961 |              921 |           936 |        910 |         927 |          986 |          920 |             0.02 |
+| BianQue2     |      10.12 |           913 |              928 |           919 |        988 |         974 |          900 |          908 |             0.00 |
+| MING         |      10.75 |           902 |              909 |           924 |        867 |         862 |          960 |          918 |             0.01 |
+| DoctorGLM    |      11.12 |           906 |              896 |           930 |        879 |         880 |          880 |          905 |             0.00 |
 
-#### Evaluation Method
+### Evaluation Method
 * In order to balance costs, we primarily utilize GPT4 for evaluation. As described in [QLoRA](https://arxiv.org/abs/2305.14314), the comparative randomness in model comparisons solely based on GPT4 scores is substantial. This aligns with our observations. Therefore, we have adopted the widely used Elo Rating tournament evaluation method, as recommended by [QLoRA](https://arxiv.org/abs/2305.14314).
 
-#### Evaluation Datasets [[eval/data]](eval/data)
+### Evaluation Datasets 
+#### Public Datasets [[eval/data]](eval/data) 
+* MedQA_USMLE: Extracting 150 samples from the USMLE/test subset of [MedQA](https://github.com/jind11/MedQA).
 * MedQA_Mainland: Extracting 150 samples from the Mainland/test subset of [MedQA](https://github.com/jind11/MedQA).
-* PromptCBLUE: Extracting 150 samples from the test subset of [PromptCBLUE](https://github.com/michael-wzhu/PromptCBLUE). <!-- * detailedMedQA: A private datset with detailed answers to 98 commonly medical domain questions. -->
+* PromptCBLUE: Extracting 150 samples from the test subset of [PromptCBLUE](https://github.com/michael-wzhu/PromptCBLUE). 
 * webMedQA: Extracting 150 samples from the test subset of [webMedQA](https://github.com/hejunqing/webMedQA).
 
-#### Evaluation Models
+#### Private Dataset
+* CheckupQA: Numerical consultation dataset in physical examination scenarios. Evaluate the model's ability to understand and analyze medical-related values.
+* MedicineQA: Medication consultation dataset with reference documents, evaluate the model's ability in the RAG (retrieval-augmented generation) scenario.
+* DialogSumm: Summarize the doctor-patient conversations to evaluate the long text capabilities of the model.
+* MedTriage: Gives guidance suggestions based on user information, evaluate the model's ability to select the correct department from given candidates.
+
+### Evaluation Models
 * GPT4: OpenAI API "gpt-4-1106-preview"
 * ChatGPT: OpenAI API "gpt-3.5-turbo-1106"
 * PULSE_pro: >100B 
@@ -83,78 +97,25 @@
 * [MING](https://huggingface.co/BlueZeros/MING-7B)
 * [DoctorGLM](https://github.com/xionghonglin/DoctorGLM) (p-tuningv2)
 
-#### Hyperparameter Selection
+### Hyperparameter Selection
 * For cost considerations, we chose to perform 360 rounds of random evaluation on each dataset. The order in which models compete against each other in the PK (player versus player) matches was randomized to counteract any order-related bias, with a random seed set to 42. The implementation code for the Elo rating and other hyperparameters can be referred to in Vicuna's Elo code: [link to Vicuna's Elo code](https://raw.githubusercontent.com/lm-sys/FastChat/833d65032a715240a3978f4a8f08e7a496c83cb1/fastchat/serve/monitor/elo_analysis.py). The Elo rating parameters used were K=8 and an initial rating of 1000.
 
-### Related Applications
-
-**XrayPULSE**
-
-An application that combines PULSE with an X-ray visual encoder, achieving multi-modal conversational capabilities.
-
-[openmedlab/XrayPULSE](https://github.com/openmedlab/XrayPULSE)
-
-![image](./pics/XrayPULSE.png)
-
-**PULSE-COVID-19**
-
-A model fine-tuned based on the PULSE, incorporating an in-house corpus of COVID-19 knowledge databases from the Guangzhou Laboratory. 
-
-[openmedlab/PULSE-COVID-19](https://github.com/openmedlab/PULSE-COVID-19)
-
-![image](./pics/covid.jpg)
-
-**Structured Data Extraction (under construction)**
-
-A structuring tool based on PULSE, designed to assist users in processing and analyzing free-text data. It offers features such as single selection, multiple selection, and information extraction.
-
-[JuneYaooo/llm_structure_tool](https://github.com/JuneYaooo/llm_structure_tool)
-
-![image](./pics/llm_structure_tool.png)
-
-**Clinical Term Normalization**
-
-An application based on PULSE for term normalization. The task of normalization is to map various clinical expressions of the same diagnosis, surgery, drug, examination, symptom, etc., to standard terminology.
-
-[JOHNNY-fans/HierNorm](https://github.com/JOHNNY-fans/HierNorm)
-
-![image](./pics/HierNorm.png) 
-
-**Knowledge Based Chatbot**
-
-A chatbot developed on PULSE, where users can add customized knowledge bases for their own application scenarios.
-
-[JuneYaooo/medical_kb_chatbot](https://github.com/JuneYaooo/medical_kb_chatbot)
-
-![image](./pics/medical_assistant.png)
+### Related Repository
+* Please refer to [PULSE-EVAL](https://github.com/openmedlab/PULSE-EVAL) for detailed code, data and results.
+* We also launched [MedBench](https://github.com/open-compass/opencompass/tree/main/configs/datasets/MedBench) on [OpenCompass](https://github.com/open-compass/opencompass), provides more evaluation metrics and datasets for evaluation of large language models in the medical field.
 
 
 
-### Use Cases
+## Fine-tuning
 
-**Medical Question Answering**
+基于[LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) 项目，我们提供了可以快速微调PULSE的代码[PULSE-tuner](https://github.com/JuneYaooo/pulse-tuner/tree/main)。
 
-![image](./pics/example_medical_science.png)
 
-**Medical Licensing Examination**
 
-![image](./pics/example_med_qa.png)
+## Quantization
 
-**Report Interpretation**
-
-![image](./pics/example_interpretation_report.png)
-
-<!-- **Structured Data Extraction**
-
-![image](./pics/example_structured_medical_record_0.png) -->
-
-**Diagnosis and Treatment Planning Support**
-
-![image](./pics/example_automatic_consultation.png)
-
-**Reject to Respond Non-related Questions**
-
-![image](./pics/example_non_medical_issues.png)
+* For new released [**PULSE-20b**](https://huggingface.co/OpenMEDLab/PULSE-20bv5), please check [LMDeploy](https://github.com/InternLM/lmdeploy) for quantization solution.
+* We also provide [GPTQ-for-PULSE](https://github.com/hanrui1sensetime/GPTQ-for-PULSE/tree/pulse) for [**PULSE-7b**](https://huggingface.co/OpenMEDLab/PULSE-7bv5) model.
 
 
 ## Inference
@@ -203,12 +164,87 @@ You can run the `cli_demo.py` in the repository to start a simple command line d
 python cli_demo.py
 ```
 
+### Use Cases
+
+**Medical Question Answering**
+
+![image](./pics/example_medical_science.png)
+
+**Medical Licensing Examination**
+
+![image](./pics/example_med_qa.png)
+
+**Report Interpretation**
+
+![image](./pics/example_interpretation_report.png)
+
+<!-- **Structured Data Extraction**
+
+![image](./pics/example_structured_medical_record_0.png) -->
+
+**Diagnosis and Treatment Planning Support**
+
+![image](./pics/example_automatic_consultation.png)
+
+**Reject to Respond Non-related Questions**
+
+![image](./pics/example_non_medical_issues.png)
+
+
+
+
+
+
+
+
+
+
+
 ## Related Links
 
-- [xxxxx]() - Tech share about PULSE
-
-
 If you have other open-source projects that use or improve PULSE, welcome to submit a Pull Request to add them to the README or contact us through Issues.
+
+### XrayPULSE
+
+An application that combines PULSE with an X-ray visual encoder, achieving multi-modal conversational capabilities.
+
+[openmedlab/XrayPULSE](https://github.com/openmedlab/XrayPULSE)
+
+![image](./pics/XrayPULSE.png)
+
+### PULSE-COVID-19
+
+A model fine-tuned based on the PULSE, incorporating an in-house corpus of COVID-19 knowledge databases from the Guangzhou Laboratory. 
+
+[openmedlab/PULSE-COVID-19](https://github.com/openmedlab/PULSE-COVID-19)
+
+![image](./pics/covid.jpg)
+
+### Structured Data Extraction
+
+A structuring tool based on PULSE, designed to assist users in processing and analyzing free-text data. It offers features such as single selection, multiple selection, and information extraction.
+
+[JuneYaooo/llm_structure_tool](https://github.com/JuneYaooo/llm_structure_tool)
+
+![image](./pics/llm_structure_tool.png)
+
+### Clinical Term Normalization
+
+An application based on PULSE for term normalization. The task of normalization is to map various clinical expressions of the same diagnosis, surgery, drug, examination, symptom, etc., to standard terminology.
+
+[JOHNNY-fans/HierNorm](https://github.com/JOHNNY-fans/HierNorm)
+
+![image](./pics/HierNorm.png) 
+
+### Knowledge Based Chatbot
+
+A chatbot developed on PULSE, where users can add customized knowledge bases for their own application scenarios.
+
+[JuneYaooo/medical_kb_chatbot](https://github.com/JuneYaooo/medical_kb_chatbot)
+
+![image](./pics/medical_assistant.png)
+
+
 
 
 ## Acknowledgement
