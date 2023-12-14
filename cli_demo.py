@@ -27,6 +27,7 @@ num_gpus = len(args.gpu.split(","))
 
 tokenizer = AutoTokenizer.from_pretrained(
     args.model_name,
+    trust_remote_code=True,
 )
 
 model = AutoModelForCausalLM.from_pretrained(
