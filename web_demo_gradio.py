@@ -198,6 +198,11 @@ def predict(
             output_tokens += token
             otext = tokenizer.decode(output_tokens, skip_special_tokens=False)
 
+            otext = otext.strip()
+            if otext[:3] == "<s>":
+                otext = otext[3:]
+            otext = otext.strip()
+
             if len(otext) > len("Helper: "):
                 response = otext[len("Helper: "): ]
 

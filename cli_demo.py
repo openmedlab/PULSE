@@ -136,6 +136,11 @@ def main():
             skip_special_tokens=False
         )
 
+        otext = otext.strip()
+        if otext[:3] == "<s>":
+            otext = otext[3:]
+        otext = otext.strip()
+
         print(otext)
         i += 1
 
