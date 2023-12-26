@@ -6,6 +6,7 @@
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-brightgreen.svg)](./LICENSE)
 [![Model License](https://img.shields.io/badge/Model%20License-GNU%20AGPL%203.0-red.svg)](./MODEL_LICENSE)
+[![Open in OpenXLab](https://cdn-static.openxlab.org.cn/header/openxlab_models.svg)](https://openxlab.org.cn/usercenter/openmedlab)
 
 \[[中文版](./README.md)\] \[[English](./README_en.md)\] 
 
@@ -125,9 +126,12 @@
 
 下表提供了一个batch size=1时本地部署PULSE进行推理所需的显存大小。
 
-| 量化等级 | 加载模型 |
-| -------- | -------- |
-| FP16     | 14GB     |
+|模型参数| 量化等级 | 加载模型 |
+| -------- | -------- | -------- |
+|7B        | FP16     | 14GB     |
+|7B        | INT4     | 6GB      |
+|20B        | FP16     | 40GB     |
+|20B        | INT4     | 12GB     |
 
 
 ### 下载安装
@@ -241,11 +245,18 @@ python cli_demo.py
 
 
 ## 致谢
-
 - 上海人工智能实验室
 - 上海交通大学-清源研究院
 - 华东理工大学-自然语言处理与大数据挖掘实验室
 
+
+## 引用
+@article{pulse2023,
+      title={PULSE: Pretrained and Unified Language Service Engine}, 
+      author={Xiaofan Zhang, Kui Xue, Shaoting Zhang},
+      year={2023},
+      url={https://github.com/openmedlab/PULSE}
+}
 
 ## 开源协议
 

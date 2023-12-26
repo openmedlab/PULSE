@@ -6,6 +6,7 @@
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-brightgreen.svg)](./LICENSE)
 [![Model License](https://img.shields.io/badge/Model%20License-GNU%20AGPL%203.0-red.svg)](./MODEL_LICENSE)
+[![Open in OpenXLab](https://cdn-static.openxlab.org.cn/header/openxlab_models.svg)](https://openxlab.org.cn/usercenter/openmedlab)
 
 \[[中文版](./README.md)\] \[[English](./README_en.md)\] 
 
@@ -122,9 +123,12 @@ We provide [PULSE-tuner](https://github.com/JuneYaooo/pulse-tuner/tree/main) to 
 
 The table below provides the required GPU memory size for local deployment of PULSE for inference with a batch size of 1.
 
-| Quantization | GPU Memory |
-| -------- | -------- |
-| FP16     | 27GB     |
+|Model Param | Quantization | GPU Memory |
+| -------- | -------- | -------- |
+|7B        | FP16     | 14GB     |
+|7B        | INT4     | 6GB      |
+|20B        | FP16     | 40GB     |
+|20B        | INT4     | 12GB     |
 
 
 ### Installation
@@ -252,6 +256,13 @@ A chatbot developed on PULSE, where users can add customized knowledge bases for
 - SJTU - Qing Yuan Reseaerch Institute
 - ECUST - NLP&BigData Lab
 
+## Citation
+@article{pulse2023,
+      title={PULSE: Pretrained and Unified Language Service Engine}, 
+      author={Xiaofan Zhang, Kui Xue, Shaoting Zhang},
+      year={2023},
+      url={https://github.com/openmedlab/PULSE}
+}
 
 ## License
 
