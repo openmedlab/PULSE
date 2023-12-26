@@ -26,6 +26,7 @@ num_gpus = len(args.gpu.split(","))
 
 tokenizer = AutoTokenizer.from_pretrained(
     args.model_name,
+    trust_remote_code=True,
 )
 
 model = AutoModelForCausalLM.from_pretrained(
@@ -196,6 +197,11 @@ def predict(
         }:
             output_tokens += token
             otext = tokenizer.decode(output_tokens, skip_special_tokens=False)
+
+            otext = otext.strip()
+            if otext[:3] == "<s>":
+                otext = otext[3:]
+            otext = otext.strip()
 
             if len(otext) > len("Helper: "):
                 response = otext[len("Helper: "): ]

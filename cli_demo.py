@@ -27,6 +27,7 @@ num_gpus = len(args.gpu.split(","))
 
 tokenizer = AutoTokenizer.from_pretrained(
     args.model_name,
+    trust_remote_code=True,
 )
 
 model = AutoModelForCausalLM.from_pretrained(
@@ -134,6 +135,11 @@ def main():
             outputs_token, 
             skip_special_tokens=False
         )
+
+        otext = otext.strip()
+        if otext[:3] == "<s>":
+            otext = otext[3:]
+        otext = otext.strip()
 
         print(otext)
         i += 1
