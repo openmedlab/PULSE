@@ -251,12 +251,14 @@ python cli_demo.py
 
 
 ## 引用
+```bib
 @article{pulse2023,
       title={PULSE: Pretrained and Unified Language Service Engine}, 
       author={Xiaofan Zhang, Kui Xue, Shaoting Zhang},
       year={2023},
       url={https://github.com/openmedlab/PULSE}
 }
+```
 
 ## 开源协议
 

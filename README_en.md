@@ -257,13 +257,14 @@ A chatbot developed on PULSE, where users can add customized knowledge bases for
 - ECUST - NLP&BigData Lab
 
 ## Citation
+```bib
 @article{pulse2023,
       title={PULSE: Pretrained and Unified Language Service Engine}, 
       author={Xiaofan Zhang, Kui Xue, Shaoting Zhang},
       year={2023},
       url={https://github.com/openmedlab/PULSE}
 }
-
+```
 ## License
 
 The code of this project is licensed under [Apache 2.0](https://github.com/openmedlab/PULSE/blob/main/LICENSE), and the model weights are licensed under[GNU AGPL 3.0](https://github.com/openmedlab/PULSE/blob/main/MODEL_LICENSE). 
